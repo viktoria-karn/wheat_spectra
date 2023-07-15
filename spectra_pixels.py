@@ -66,6 +66,15 @@ def image_index(image_in_array, borders=None):
     return label_img
 
 def extract_gray_matr_spectrs(image_array,image_out_path):
+    r_min = 139
+    r_max = 148
+
+    g_min = 141
+    g_max = 157
+
+    b_min = 84
+    b_max = 99
+    
     pixel_spectr_coord = []
     image_out_array = image_array
 
@@ -73,9 +82,8 @@ def extract_gray_matr_spectrs(image_array,image_out_path):
         writer = csv.writer(f)
         for i in range(len(image_array)):
             for j in range(len(image_array[i])):
-                if 139 <= int(image_array[i][j][0]) <= 148 and 141 <= int(image_array[i][j][1]) <= 157 and 84 <= int(
-                        image_array[i][j][2]) <= 99:
-                #if 230 <= int(image_array[i][j][0]) <= 255 and 165 <= int(image_array[i][j][1]) <= 230 and 0 <= int(image_array[i][j][2]) <= 35:
+                if r_min <= int(image_array[i][j][0]) <= r_max and g_min <= int(image_array[i][j][1]) <= g_max and b_min <= int(
+                        image_array[i][j][2]) <= b_max:
                     image_out_array[i][j] = 255
                     pixel_spectr_coord.append([i, j])
                     writer.writerow([i, j])
